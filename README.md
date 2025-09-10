@@ -27,10 +27,9 @@ This feature requires:
 
 ## Examples
 
-- File only (no cursor focus): `@src/extension.ts`
-- Single line: `@src/extension.ts#L15`
-- Line range: `@docs/readme.md#L22-26`
-- Current cursor position: `@package.json#L5`
+- File only (cursor positioned but no text selected): `@src/extension.ts`
+- Single line selected: `@src/extension.ts#L15`
+- Line range selected: `@docs/readme.md#L22-26`
 
 ## Installation
 

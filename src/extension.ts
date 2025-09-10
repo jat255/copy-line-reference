@@ -12,7 +12,7 @@ function generateReference(editor: vscode.TextEditor): string | null {
 
     const relativePath = path.relative(workspaceFolder.uri.fsPath, document.fileName);
     
-    // Check if there's any text selected
+    // Only include line numbers if there's actual text selected
     if (!selection.isEmpty) {
         let startLine = selection.start.line + 1;
         let endLine = selection.end.line + 1;
@@ -24,16 +24,8 @@ function generateReference(editor: vscode.TextEditor): string | null {
         }
     }
     
-    // Check if cursor is positioned (has focus) vs just file is open
-    // If the selection is empty and at position 0,0, assume no specific line focus
-    if (selection.start.line === 0 && selection.start.character === 0 && 
-        selection.end.line === 0 && selection.end.character === 0) {
-        return `@${relativePath}`;
-    }
-    
-    // Cursor is positioned on a specific line
-    const currentLine = selection.active.line + 1;
-    return `@${relativePath}#L${currentLine}`;
+    // No text selected - return file path only
+    return `@${relativePath}`;
 }
 
 function findSideEditor(): vscode.TextEditor | null {
