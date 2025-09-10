@@ -2,7 +2,7 @@
   "name": "copy-line-reference",
   "displayName": "Copy Line Reference",
   "description": "Copy reference to selected lines of code with a hotkey",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "reily",
   "repository": {
     "type": "git",
