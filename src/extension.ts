@@ -28,16 +28,25 @@ function generateReference(editor: vscode.TextEditor): string | null {
     return `@${relativePath}`;
 }
 
-function findSideEditor(): vscode.TextEditor | null {
+function findSideTarget(): { editor?: vscode.TextEditor, terminal?: vscode.Terminal } {
     const visibleEditors = vscode.window.visibleTextEditors;
     const activeEditor = vscode.window.activeTextEditor;
+    const activeTerminal = vscode.window.activeTerminal;
     
-    if (!activeEditor || visibleEditors.length < 2) {
-        return null;
+    // First try to find a side editor
+    if (activeEditor && visibleEditors.length >= 2) {
+        const sideEditor = visibleEditors.find(editor => editor !== activeEditor);
+        if (sideEditor) {
+            return { editor: sideEditor };
+        }
     }
     
-    // Find the first editor that's not the active one
-    return visibleEditors.find(editor => editor !== activeEditor) || null;
+    // If no side editor, check if there's an active terminal
+    if (activeTerminal) {
+        return { terminal: activeTerminal };
+    }
+    
+    return {};
 }
 
 function getSmartInsertionText(editor: vscode.TextEditor, reference: string): { text: string, newPosition?: vscode.Position } {
@@ -120,33 +129,36 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        const sideEditor = findSideEditor();
-        if (!sideEditor) {
-            vscode.window.showWarningMessage('No side editor found. Split the editor first.');
+        const target = findSideTarget();
+        
+        if (target.editor) {
+            // Insert into side editor with smart logic
+            const insertion = getSmartInsertionText(target.editor, reference);
+            
+            target.editor.edit(editBuilder => {
+                if (insertion.newPosition) {
+                    editBuilder.insert(insertion.newPosition, insertion.text);
+                } else {
+                    editBuilder.insert(target.editor!.selection.active, insertion.text);
+                }
+            }).then(() => {
+                if (insertion.newPosition) {
+                    const newCursorPos = new vscode.Position(
+                        insertion.newPosition.line,
+                        insertion.newPosition.character + insertion.text.length
+                    );
+                    target.editor!.selection = new vscode.Selection(newCursorPos, newCursorPos);
+                }
+                vscode.window.showInformationMessage(`Inserted: ${reference}`);
+            });
+        } else if (target.terminal) {
+            // Insert into active terminal (simple append with space)
+            target.terminal.sendText(reference + ' ', false);
+            vscode.window.showInformationMessage(`Sent to terminal: ${reference}`);
+        } else {
+            vscode.window.showWarningMessage('No side editor or active terminal found. Split the editor or open a terminal.');
             return;
         }
-
-        const insertion = getSmartInsertionText(sideEditor, reference);
-        
-        sideEditor.edit(editBuilder => {
-            if (insertion.newPosition) {
-                // First move cursor to new position, then insert
-                editBuilder.insert(insertion.newPosition, insertion.text);
-            } else {
-                // Insert at current position
-                editBuilder.insert(sideEditor.selection.active, insertion.text);
-            }
-        }).then(() => {
-            // Update cursor position after insertion if needed
-            if (insertion.newPosition) {
-                const newCursorPos = new vscode.Position(
-                    insertion.newPosition.line,
-                    insertion.newPosition.character + insertion.text.length
-                );
-                sideEditor.selection = new vscode.Selection(newCursorPos, newCursorPos);
-            }
-            vscode.window.showInformationMessage(`Inserted: ${reference}`);
-        });
     });
 
     context.subscriptions.push(copyDisposable, insertDisposable);

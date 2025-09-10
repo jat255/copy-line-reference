@@ -8,6 +8,7 @@ A VS Code extension that copies references to selected lines of code with a hotk
 - Copy file-only references `@filename.ext` when no specific line is focused
 - Works with single lines or multi-line selections
 - Uses relative paths from workspace root
+- Smart insertion into side editors or terminals
 - Available via hotkey or Command Palette
 
 ## Usage
@@ -16,14 +17,18 @@ A VS Code extension that copies references to selected lines of code with a hotk
 **Hotkey**: `Ctrl+Alt+R` (Windows/Linux) or `Cmd+Alt+R` (Mac)
 **Command Palette**: "Copy Line Reference"
 
-### Insert Reference to Side Editor
+### Insert Reference to Side Editor or Terminal
 **Hotkey**: `Ctrl+Alt+I` (Windows/Linux) or `Cmd+Alt+I` (Mac)
 **Command Palette**: "Insert Line Reference to Side Editor"
 
-This feature requires:
-1. Split editor view (View > Editor Layout > Split Editor)
-2. Two files open side-by-side
-3. Select code in one editor, hit the hotkey, and the reference gets inserted into the other editor
+This feature works with:
+1. **Split Editor**: Requires split editor view with two files open side-by-side
+2. **Terminal**: Works with any active terminal - simply appends the reference
+
+The extension intelligently chooses the target:
+- If a side editor is available, uses smart insertion logic
+- If no side editor but terminal is active, sends reference to terminal
+- References are inserted with appropriate spacing for continued typing
 
 ## Examples
 
