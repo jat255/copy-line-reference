@@ -54,6 +54,27 @@ This extension contributes no additional settings.
 
 ## Release Notes
 
+### 0.0.4
+
+- **Terminal Support**: Insert references directly into active terminal
+- **Smart Target Detection**: Automatically chooses between side editor and terminal
+- **Enhanced Integration**: References appended to terminal with trailing space for continued typing
+
+### 0.0.3
+
+- **New Keyboard Shortcuts**: Changed to `Cmd+Alt+R` and `Cmd+Alt+I` (less likely to conflict)
+- **Smart Insertion Logic**: Context-aware insertion with proper spacing
+  - Blank lines: Insert reference + space
+  - End of words: Add proper spacing around reference
+  - Mid-word: Move to word end first, then insert
+  - Always adds trailing space for continued typing
+
+### 0.0.2
+
+- **Fixed Line Number Logic**: Line numbers only included when text is actually selected
+- **File-Only References**: Cursor positioning alone returns file path only (`@file.ext`)
+- **Improved Behavior**: More intuitive reference generation
+
 ### 0.0.1
 
 Initial release with basic line reference copying functionality.
