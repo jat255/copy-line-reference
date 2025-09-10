@@ -21,6 +21,10 @@
       {
         "command": "copyLineReference.copyReference",
         "title": "Copy Line Reference"
+      },
+      {
+        "command": "copyLineReference.insertReferenceToSide",
+        "title": "Insert Line Reference to Side Editor"
       }
     ],
     "keybindings": [
@@ -28,6 +32,12 @@
         "command": "copyLineReference.copyReference",
         "key": "ctrl+shift+r",
         "mac": "cmd+shift+r",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "copyLineReference.insertReferenceToSide",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
         "when": "editorTextFocus"
       }
     ]

@@ -11,14 +11,18 @@ A VS Code extension that copies references to selected lines of code with a hotk
 
 ## Usage
 
-### Hotkey
-- **Windows/Linux**: `Ctrl+Shift+R`
-- **Mac**: `Cmd+Shift+R`
+### Copy Line Reference
+**Hotkey**: `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac)
+**Command Palette**: "Copy Line Reference"
 
-### Command Palette
-1. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
-2. Type "Copy Line Reference"
-3. Press Enter
+### Insert Reference to Side Editor
+**Hotkey**: `Ctrl+Shift+I` (Windows/Linux) or `Cmd+Shift+I` (Mac)
+**Command Palette**: "Insert Line Reference to Side Editor"
+
+This feature requires:
+1. Split editor view (View > Editor Layout > Split Editor)
+2. Two files open side-by-side
+3. Select code in one editor, hit the hotkey, and the reference gets inserted into the other editor
 
 ## Examples
 
