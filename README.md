@@ -5,6 +5,7 @@ A VS Code extension that copies references to selected lines of code with a hotk
 ## Features
 
 - Copy references to code lines in the format `@filename.ext#L15` or `@filename.ext#L15-20`
+- Copy file-only references `@filename.ext` when no specific line is focused
 - Works with single lines or multi-line selections
 - Uses relative paths from workspace root
 - Available via hotkey or Command Palette
@@ -26,6 +27,7 @@ This feature requires:
 
 ## Examples
 
+- File only (no cursor focus): `@src/extension.ts`
 - Single line: `@src/extension.ts#L15`
 - Line range: `@docs/readme.md#L22-26`
 - Current cursor position: `@package.json#L5`
