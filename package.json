@@ -30,14 +30,14 @@
     "keybindings": [
       {
         "command": "copyLineReference.copyReference",
-        "key": "ctrl+shift+r",
-        "mac": "cmd+shift+r",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
         "when": "editorTextFocus"
       },
       {
         "command": "copyLineReference.insertReferenceToSide",
-        "key": "ctrl+shift+i",
-        "mac": "cmd+shift+i",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
         "when": "editorTextFocus"
       }
     ]
