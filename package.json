@@ -3,10 +3,10 @@
   "displayName": "Copy Line Reference",
   "description": "Copy reference to selected lines of code with a hotkey",
   "version": "0.0.1",
-  "publisher": "your-publisher-name",
+  "publisher": "reily",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/copy-line-reference"
+    "url": "https://github.com/zhigang1992/copy-line-reference"
   },
   "engines": {
     "vscode": "^1.74.0"
