@@ -54,6 +54,10 @@ This extension contributes no additional settings.
 
 ## Release Notes
 
+### 0.0.5
+
+- **Documentation Update**: Ensure marketplace displays latest README with complete feature documentation
+
 ### 0.0.4
 
 - **Terminal Support**: Insert references directly into active terminal
