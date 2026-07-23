@@ -1,31 +1,30 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
 
 function generateReference(editor: vscode.TextEditor): string | null {
     const document = editor.document;
     const selection = editor.selection;
-    const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
-    
-    if (!workspaceFolder) {
+
+    // Needs a file on disk to have an absolute path
+    if (document.isUntitled || document.uri.scheme !== 'file') {
         return null;
     }
 
-    const relativePath = path.relative(workspaceFolder.uri.fsPath, document.fileName);
-    
+    const absolutePath = document.uri.fsPath;
+
     // Only include line numbers if there's actual text selected
     if (!selection.isEmpty) {
         let startLine = selection.start.line + 1;
         let endLine = selection.end.line + 1;
-        
+
         if (startLine === endLine) {
-            return `@${relativePath}#L${startLine}`;
+            return `@${absolutePath}#L${startLine}`;
         } else {
-            return `@${relativePath}#L${startLine}-${endLine}`;
+            return `@${absolutePath}#L${startLine}-${endLine}`;
         }
     }
-    
+
     // No text selected - return file path only
-    return `@${relativePath}`;
+    return `@${absolutePath}`;
 }
 
 function findSideTarget(): { editor?: vscode.TextEditor, terminal?: vscode.Terminal } {
@@ -108,7 +107,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         const reference = generateReference(editor);
         if (!reference) {
-            vscode.window.showWarningMessage('File is not in a workspace');
+            vscode.window.showWarningMessage('File must be saved to disk to copy an absolute path reference');
             return;
         }
 
@@ -125,7 +124,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         const reference = generateReference(editor);
         if (!reference) {
-            vscode.window.showWarningMessage('File is not in a workspace');
+            vscode.window.showWarningMessage('File must be saved to disk to copy an absolute path reference');
             return;
         }
 

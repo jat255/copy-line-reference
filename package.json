@@ -2,7 +2,7 @@
   "name": "copy-line-reference",
   "displayName": "Copy Line Reference (Fork)",
   "description": "Copy reference to selected lines of code with a hotkey. Personal fork of reily/copy-line-reference.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "josh-taillon",
   "author": {
     "name": "Josh Taillon",
@@ -39,8 +39,8 @@
     "keybindings": [
       {
         "command": "copyLineReference.copyReference",
-        "key": "ctrl+alt+r",
-        "mac": "cmd+alt+r",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
         "when": "editorTextFocus"
       },
       {
