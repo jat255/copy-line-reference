@@ -1,6 +1,11 @@
-# Copy Line Reference
+# Copy Line Reference (Fork)
 
 A VS Code extension that copies references to selected lines of code with a hotkey.
+
+> **Note:** This is a personal fork maintained by **Josh Taillon** (joshua.taillon@posit.co),
+> repackaged for local/personal use in Positron.
+> Original extension by **reily** ([zhigang1992/copy-line-reference](https://github.com/zhigang1992/copy-line-reference))
+> — all credit for the functionality goes to the original author.
 
 ## Features
 
@@ -36,12 +41,35 @@ The extension intelligently chooses the target:
 - Single line selected: `@src/extension.ts#L15`
 - Line range selected: `@docs/readme.md#L22-26`
 
+## Building the VSIX
+
+To build the extension into an installable `.vsix` from source:
+
+```bash
+git clone https://github.com/jat255/copy-line-reference.git
+cd copy-line-reference
+npm install
+npx @vscode/vsce package   # -> copy-line-reference-<version>.vsix
+```
+
+This compiles the TypeScript (`npm run compile`) and packages it. The resulting
+`.vsix` is written to the project root. No auto-updates — re-run the last two
+commands to rebuild after pulling changes.
+
 ## Installation
 
-1. Download the `.vsix` file
-2. In VS Code, go to Extensions view (`Ctrl+Shift+X`)
+1. Build (see above) or download the `.vsix` file
+2. In VS Code / Positron, open the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
 3. Click the "..." menu and select "Install from VSIX..."
-4. Select the downloaded file
+4. Select the `.vsix` file
+
+Or from the command line:
+
+```bash
+code --install-extension copy-line-reference-<version>.vsix
+# Positron:
+positron --install-extension copy-line-reference-<version>.vsix
+```
 
 ## Requirements
 

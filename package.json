@@ -1,12 +1,21 @@
 {
   "name": "copy-line-reference",
-  "displayName": "Copy Line Reference",
-  "description": "Copy reference to selected lines of code with a hotkey",
+  "displayName": "Copy Line Reference (Fork)",
+  "description": "Copy reference to selected lines of code with a hotkey. Personal fork of reily/copy-line-reference.",
   "version": "0.0.5",
-  "publisher": "reily",
+  "publisher": "josh-taillon",
+  "author": {
+    "name": "Josh Taillon",
+    "email": "joshua.taillon@posit.co"
+  },
+  "fork": {
+    "of": "reily.copy-line-reference",
+    "originalAuthor": "reily (zhigang1992)",
+    "source": "https://github.com/zhigang1992/copy-line-reference"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhigang1992/copy-line-reference"
+    "url": "https://github.com/jat255/copy-line-reference"
   },
   "engines": {
     "vscode": "^1.74.0"
